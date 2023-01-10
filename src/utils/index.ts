@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
-export const isFalsy = value => (value === 0 ? false : !value)
+export const isFalsy = (value: number) => (value === 0 ? false : !value)
 
-export const cleanObject = object => {
+export const cleanObject = (object: object) => {
   console.log('object:' + object)
   const result = { ...object }
-  Object.keys(result).forEach(key => {
+  Object.keys(result).forEach((key) => {
     const value = result[key]
     // 假设 value==0 也会删掉
     if (isFalsy(value)) {
@@ -16,14 +16,14 @@ export const cleanObject = object => {
 }
 // hook 是要在组件、其他hook里运行
 // use开头是hook 里面可以使用useEffect
-export const useMount = callback => {
+export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback()
   }, [])
 }
 
 // debounce 输入字，输完发一次请求
-export const useDebounce = (value, delay) => {
+export const useDebounce = <T>(value: T, delay?: number) => {
   const [debounceValue, setDebounceValue] = useState(value)
   useEffect(() => {
     // 每次再value变化以后，设置一个定时器
