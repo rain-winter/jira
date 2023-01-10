@@ -1,6 +1,6 @@
 import * as qs from 'qs'
 import { useEffect, useState } from 'react'
-import { cleanObject } from 'util'
+import { cleanObject, useDebounce, useMount } from 'utils'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
 
@@ -14,26 +14,27 @@ export const ProductListScreen = () => {
   const [list, setList] = useState([])
   const [users, setUsers] = useState([])
 
+  const debounceParam = useDebounce(param, 2000)
+  console.log('debounceParam+' + debounceParam)
+
   // setParam(Object.assign({},param,{name:e.target.value}))
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(
-      async response => {
-        if (response.ok) {
-          setList(await response.json())
-        }
+    fetch(
+      `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
+    ).then(async response => {
+      if (response.ok) {
+        setList(await response.json())
       }
-    )
-  }, [param])
-
-  useEffect(() => {
-    console.log(apiUrl)
-
+    })
+  }, [debounceParam])
+  // 加载一次，初始化
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async response => {
       if (response.ok) {
         setUsers(await response.json())
       }
     })
-  }, [])
+  })
   return (
     <div>
       <SearchPanel users={users} param={param} setParam={setParam} />
