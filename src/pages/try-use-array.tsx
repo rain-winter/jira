@@ -1,4 +1,4 @@
-import {useArray, useMount} from "../utils";
+import { useArray, useMount } from "../utils";
 
 export const TsReactTest = () => {
     const persons: { name: string; age: number }[] = [

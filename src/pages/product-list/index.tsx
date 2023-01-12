@@ -21,7 +21,7 @@ export const ProductListScreen = () => {
   useEffect(() => {
     fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
-    ).then(async response => {
+    ).then(async (response) => {
       if (response.ok) {
         setList(await response.json())
       }
@@ -29,7 +29,7 @@ export const ProductListScreen = () => {
   }, [debounceParam])
   // 加载一次，初始化
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async response => {
+    fetch(`${apiUrl}/users`).then(async (response) => {
       if (response.ok) {
         setUsers(await response.json())
       }

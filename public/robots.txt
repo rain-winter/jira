@@ -1,4 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-# 搜索引擎不访问secret一下的页面
-Disallow: /secret
+Disallow:

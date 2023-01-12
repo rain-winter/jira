@@ -1,16 +1,12 @@
-// import { ProductListScreen } from 'screen/product-list'
-import { LoginScreen } from 'screen/login'
-import './App.css'
-// import {TsReactTest} from "./screen/try-use-array";
+import { LoginPage } from 'pages/login';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      {/*<ProductListScreen />*/}
-        {/* <TsReactTest /> */}
-        <LoginScreen />
+      <LoginPage />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
