@@ -10,7 +10,7 @@ interface AuthForm {
 const AuthContext = React.createContext<
   | {
       user: User | null
-      register: (form: AuthForm) => Promise<void>
+      register: (form: AuthForm) => void
       login: (form: AuthForm) => Promise<void>
       logout: () => Promise<void>
     }
@@ -19,12 +19,13 @@ const AuthContext = React.createContext<
 
 AuthContext.displayName = 'AuthContext'
 
+// AuthProvider包裹最外面的app
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   //    point free
   //   (form: AuthForm) => auth.login(form).then(user => setUser(user)) 写法相等
-  const login = (form: AuthForm) => auth.login(form).then(setUser)
-  const register = (form: AuthForm) => auth.register(form).then(setUser)
+  const login = (form: AuthForm) => auth.login(form).then(setUser);
+  const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then(() => setUser(null))
   return (
     <AuthContext.Provider

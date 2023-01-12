@@ -1,12 +1,15 @@
-import { LoginPage } from 'pages/login';
-import './App.css';
+import { AuthencicatedApp } from 'authencicated-app'
+import { useAuth } from 'context/auth-context'
+import { UnanthenticatedApp } from 'unauthenticated-app'
+import './App.css'
 
 function App() {
+  const { user } = useAuth()
   return (
     <div className="App">
-      <LoginPage />
+      {user ? <AuthencicatedApp /> : <UnanthenticatedApp />}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
