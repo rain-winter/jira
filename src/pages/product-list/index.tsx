@@ -1,9 +1,9 @@
+import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { cleanObject, useDebounce, useMount } from 'utils'
 import { useHttp } from 'utils/http'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
-
 
 export const ProductListScreen = () => {
   const [param, setParam] = useState({
@@ -26,10 +26,11 @@ export const ProductListScreen = () => {
     //     setList(await response.json())
     //   }
     // })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceParam])
   // 加载一次，初始化
   useMount(() => {
-    client('users',{}).then(setUsers)
+    client('users', {}).then(setUsers)
     // fetch(`${apiUrl}/users`).then(async (response) => {
     //   if (response.ok) {
     //     setUsers(await response.json())
@@ -37,9 +38,13 @@ export const ProductListScreen = () => {
     // })
   })
   return (
-    <div>
+    <Container>
       <SearchPanel users={users} param={param} setParam={setParam} />
       <List users={users} list={list} />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  padding: 3.2rem;
+`

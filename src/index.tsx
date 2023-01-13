@@ -1,19 +1,19 @@
-import { AuthProvider } from 'context/auth-context'
-import { loadDevTools } from 'jira-dev-tool'
+import { AppProviders } from 'context'
+import { DevTools, loadServer } from 'jira-dev-tool'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-loadDevTools(() =>
+loadServer(() =>
   root.render(
     <React.StrictMode>
-      <AuthProvider>
+      <AppProviders>
+        <DevTools />
         <App />
-      </AuthProvider>
+      </AppProviders>
     </React.StrictMode>
   )
 )

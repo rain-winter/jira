@@ -1,14 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 export const isFalsy = (value: any) => (value === 0 ? false : !value)
+// 值是undefined null 空字符串就是无意义的，用于替换isFalsy
+export const isVoid = (value: unknown) =>
+  value === undefined || value === null || value === "";
+
+// let a: object
+// a = { name: 'jack' }
+// a = () => {}
+// a = new RegExp('')
+// a = { ...() => {} } // 这就是一个空对象了
+// 这里我们想要的就是一个键值对的对象
+
+// let a: { [key: string]: unknown }
 
 export const cleanObject = (object?: { [key: string]: unknown }) => {
-  console.log('object:' + object)
+  //
   const result = { ...object }
   Object.keys(result).forEach((key) => {
     const value = result[key]
     // 假设 value==0 也会删掉
-    if (isFalsy(value)) {
+    if (isVoid(value)) {
       delete result[key]
     }
   })
@@ -19,6 +31,8 @@ export const cleanObject = (object?: { [key: string]: unknown }) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback()
+    // TODO 依赖项加上callback会造成无线循环，这个和useCallback以及useMeno有关
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
