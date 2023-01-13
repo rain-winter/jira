@@ -1,3 +1,5 @@
+import { Input } from "antd"
+
 interface SearchPanelProps {
     users: User[]
     param: {
@@ -17,7 +19,7 @@ interface SearchPanelProps {
     return (
       <form>
         <div>
-          <input
+          <Input
             type="text"
             value={param.name}
             onChange={(e) =>
