@@ -1,5 +1,6 @@
-import { Button, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import { AuthForm, useAuth } from 'context/auth-context'
+import { LongButton } from 'unauthenticated-app'
 
 export const LoginPage = () => {
   const { login } = useAuth()
@@ -27,16 +28,16 @@ export const LoginPage = () => {
     //   <button type="submit">登录</button>
     // </form>
     <Form onFinish={handleSubmit}>
-      <Form.Item name="username" label="用户名" rules={[{ required: true }]}>
+      <Form.Item name="username" rules={[{ required: true }]}>
         <Input type="text" />
       </Form.Item>
-      <Form.Item name="password" label="密码" rules={[{ required: true }]}>
+      <Form.Item name="password" rules={[{ required: true }]}>
         <Input type="password" />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <LongButton type="primary" htmlType="submit">
           登录
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   )
