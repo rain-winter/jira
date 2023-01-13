@@ -4,7 +4,6 @@ import { useHttp } from 'utils/http'
 import { List } from './list'
 import { SearchPanel } from './search-panel'
 
-const apiUrl = process.env.REACT_APP_API_URL
 
 export const ProductListScreen = () => {
   const [param, setParam] = useState({

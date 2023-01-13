@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import { useState } from 'react'
 import { LoginPage } from './login'
 import { RegisterPage } from './register'
@@ -10,7 +11,7 @@ export const UnanthenticatedApp = () => {
   return (
     <div>
       {isRegister ? <RegisterPage /> : <LoginPage />}
-      <button onClick={() => setIsRegister(!isRegister)}>切换</button>
+      <Button onClick={() => setIsRegister(!isRegister)}>切换</Button>
     </div>
   )
 }

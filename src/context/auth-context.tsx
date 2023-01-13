@@ -4,7 +4,7 @@ import React, { ReactNode, useState } from 'react'
 import { useMount } from 'utils'
 import { http } from 'utils/http'
 
-interface AuthForm {
+export interface AuthForm {
   username: string
   password: string
 }

@@ -1,5 +1,7 @@
 import { User } from 'pages/product-list/search-panel'
-
+/**
+ * 封装了登录注册退出、获取token等方法
+ */
 // 真实环境，使用firebase这种第三方auth服务，这个文件不需要开发
 const localStorageKey = '__auth_provider_token__'
 const apiUrl = process.env.REACT_APP_API_URL
