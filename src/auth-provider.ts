@@ -4,6 +4,7 @@ import { User } from 'pages/product-list/search-panel'
 const localStorageKey = '__auth_provider_token__'
 const apiUrl = process.env.REACT_APP_API_URL
 
+//获取token
 export const getToken = () => window.localStorage.getItem(localStorageKey)
 export const handleUserResponse = ({ user }: { user: User }) => {
   window.localStorage.setItem(localStorageKey, user.token || '')
