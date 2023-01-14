@@ -1,48 +1,38 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
-import { cleanObject, useDebounce, useMount } from 'utils'
-import { useHttp } from 'utils/http'
-import { List } from './list'
-import { SearchPanel } from './search-panel'
+import {useState} from 'react'
+import {useDebounce} from 'utils'
+import {List} from './list'
+import {SearchPanel} from './search-panel'
+import {Typography} from "antd";
+import {useProjects} from "../../utils/project";
+import {useUsers} from "../../utils/user";
 
 export const ProductListScreen = () => {
-  const [param, setParam] = useState({
-    name: '',
-    personId: '',
-  })
-  const [list, setList] = useState([])
-  const [users, setUsers] = useState([])
+    const [param, setParam] = useState({
+        name: '',
+        personId: '',
+    })
 
-  const debounceParam = useDebounce(param, 2000)
-  const client = useHttp() // 封装好的请求方法
+    const debounceParam = useDebounce(param, 1200)
+    const {isLoading, error, data: list} = useProjects(debounceParam)
+    const {data: users} = useUsers()
 
-  // setParam(Object.assign({},param,{name:e.target.value}))
-  useEffect(() => {
-    client('projects', { data: cleanObject(debounceParam) }).then(setList)
-    // fetch(
-    //   `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
-    // ).then(async (response) => {
-    //   if (response.ok) {
-    //     setList(await response.json())
-    //   }
-    // })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceParam])
-  // 加载一次，初始化
-  useMount(() => {
-    client('users', {}).then(setUsers)
-    // fetch(`${apiUrl}/users`).then(async (response) => {
-    //   if (response.ok) {
-    //     setUsers(await response.json())
-    //   }
-    // })
-  })
-  return (
-    <Container>
-      <SearchPanel users={users} param={param} setParam={setParam} />
-      <List users={users} list={list} />
-    </Container>
-  )
+    //  第一种写法
+    // setParam(Object.assign({},param,{name:e.target.value}))
+    // const {run, isLoading, error, data: list} = useAsync<Project[]>()
+    // useEffect(() => {
+    //     run(client('projects', {data: cleanObject(debounceParam)}))
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [debounceParam])
+
+    return (
+        <Container>
+            <h1>项目列表</h1>
+            <SearchPanel users={users || []} param={param} setParam={setParam}/>
+            {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+            <List loading={isLoading} users={users || []} dataSource={list || []}/>
+        </Container>
+    )
 }
 
 const Container = styled.div`
