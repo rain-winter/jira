@@ -1,9 +1,8 @@
-
-import {Table, TableProps} from 'antd'
+import { Table, TableProps } from 'antd'
 import dayjs from 'dayjs'
 import { User } from './search-panel'
 
-interface listProps extends TableProps<Project>{
+interface listProps extends TableProps<Project> {
   users: User[]
 }
 export interface Project {
@@ -14,9 +13,7 @@ export interface Project {
   organization: string
   created: number
 }
-export const List = ({  users,...props }: listProps) => {
-  // console.log(users)
-console.log(props)
+export const List = ({ users, ...props }: listProps) => {
   return (
     <Table
       rowKey={'id'}
