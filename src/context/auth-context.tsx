@@ -24,11 +24,11 @@ const bootstrapUser = async () => {
 
 const AuthContext = React.createContext<
   | {
-      user: User | null
-      register: (form: AuthForm) => void
-      login: (form: AuthForm) => Promise<void>
-      logout: () => Promise<void>
-    }
+    user: User | null
+    register: (form: AuthForm) => void
+    login: (form: AuthForm) => Promise<void>
+    logout: () => Promise<void>
+  }
   | undefined
 >(undefined)
 

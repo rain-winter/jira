@@ -4,6 +4,7 @@ import left from 'assets/left.svg'
 import logo from 'assets/logo.svg'
 import right from 'assets/right.svg'
 import {useState} from 'react'
+import { useDocumentTitle } from 'utils'
 import {LoginPage} from './login'
 import {RegisterPage} from './register'
 
@@ -13,6 +14,10 @@ import {RegisterPage} from './register'
 export const UnanthenticatedApp = () => {
     const [isRegister, setIsRegister] = useState(false)
     const [error, setError] = useState<Error | null>(null)
+
+
+    useDocumentTitle('登录注册再继续')
+
     return (
         <Container>
             <Header/>

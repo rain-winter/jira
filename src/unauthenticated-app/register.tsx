@@ -9,7 +9,7 @@ export const RegisterPage = ({
 	onError: (error: Error) => void
 }) => {
 	const { register } = useAuth()
-	const { run, isLoading } = useAsync(undefined, { throwOnError: true })
+	const { isLoading } = useAsync(undefined, { throwOnError: true })
 	// const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 	//   event.preventDefault()
 	//   const username = (event.currentTarget.elements[0] as HTMLInputElement).value

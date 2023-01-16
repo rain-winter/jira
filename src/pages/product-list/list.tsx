@@ -15,6 +15,8 @@ export interface Project {
   created: number
 }
 export const List = ({  users,...props }: listProps) => {
+  // console.log(users)
+console.log(props)
   return (
     <Table
       rowKey={'id'}

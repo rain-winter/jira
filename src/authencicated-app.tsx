@@ -12,7 +12,6 @@ import {ReactComponent as SoftWareLogo} from 'assets/software-logo.svg'
  */
 export const AuthencicatedApp = () => {
     const {logout, user} = useAuth()
-    const value: any = undefined
     const items: MenuProps['items'] = [
         {
             key: '1',

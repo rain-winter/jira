@@ -16,6 +16,7 @@
     "antd": "^5.1.4",
     "dayjs": "^1.11.7",
     "jira-dev-tool": "^1.6.59",
+    "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^7.0.0"
+    "@craco/craco": "^7.0.0",
+    "@types/qs": "^6.9.7"
   }
 }
