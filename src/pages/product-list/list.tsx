@@ -1,5 +1,6 @@
 import { Table, TableProps } from 'antd'
 import dayjs from 'dayjs'
+import {Link} from 'react-router-dom'
 import { User } from './search-panel'
 
 interface listProps extends TableProps<Project> {
@@ -28,7 +29,8 @@ export const List = ({ users, ...props }: listProps) => {
           title: '名称',
           sorter: (a, b) => a.name.localeCompare(b.name),
           render(value, project) {
-            return <span>{project.name}</span>
+            // * 本来就是project路径下的 link to id 跳转到 /projects/1
+            return <Link to={String(project.id)}>{project.name}</Link>
           },
         },
         {

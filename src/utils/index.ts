@@ -86,22 +86,22 @@ export const useDocumentTitle = (title: string, keepOnUnmount: boolean = true) =
  * @param keepOnUnmount false 卸载页面恢复上一个标题
  */
 //React Hook useEffect has missing dependencies: 'keepOnUnmount' and 'oldTitle
-export const useDocumentTitle1 = (
-  title: string,
-  keepOnUnmount: boolean = true
-) => {
-  const oldTitle = document.title
-  // 页面加载时 oldTitle = reactapp
-  // 加载后：oldTitle == 新title
-  useEffect(() => {
-    document.title = title
-  }, [title]) // * 要出入title
+// export const useDocumentTitle1 = (
+//   title: string,
+//   keepOnUnmount: boolean = true
+// ) => {
+//   const oldTitle = document.title
+//   // 页面加载时 oldTitle = reactapp
+//   // 加载后：oldTitle == 新title
+//   useEffect(() => {
+//     document.title = title
+//   }, [title]) // * 要出入title
 
-  useEffect(() => {
-    return () => {
-      if (!keepOnUnmount) {
-        document.title = oldTitle
-      }
-    }
-  }, [])
-}
+//   useEffect(() => {
+//     return () => {
+//       if (!keepOnUnmount) {
+//         document.title = oldTitle
+//       }
+//     }
+//   }, [])
+// }

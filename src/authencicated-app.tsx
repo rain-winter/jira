@@ -1,43 +1,64 @@
 import styled from '@emotion/styled'
-import {Dropdown, MenuProps, Typography} from 'antd'
-import {Row} from 'components/lib'
-import {useAuth} from 'context/auth-context'
-import {ProductListScreen} from 'pages/product-list'
+import { Dropdown, MenuProps, Typography } from 'antd'
+import { Row } from 'components/lib'
+import { useAuth } from 'context/auth-context'
+import { ProductListScreen } from 'pages/product-list'
 // 渲染svg
-import {ReactComponent as SoftWareLogo} from 'assets/software-logo.svg'
+import { ReactComponent as SoftWareLogo } from 'assets/software-logo.svg'
+import { Routes, Route, Navigate } from 'react-router'
+import { redirect, BrowserRouter } from 'react-router-dom'
+import { ProjectPage } from 'pages/project'
 
 /**
  * 已经登录了直接来这
  * @returns
  */
 export const AuthencicatedApp = () => {
-    const {logout, user} = useAuth()
-    const items: MenuProps['items'] = [
-        {
-            key: '1',
-            label: <span onClick={logout}>注销</span>,
-        },
-    ]
-    return (
-        <Container>
-            <Header between={true}>
-                <HeaderLeft gap={true}>
-                    <SoftWareLogo width={'18rem'} color={'rgb(38,132,255'}/>
-                    <h2>项目</h2>
-                    <h2>用户</h2>
-                </HeaderLeft>
-                <HeaderRight>
-                    <Dropdown menu={{items}} placement="bottom">
-                        <Typography.Title level={5} type="success">Hi，{user?.name || '无'}</Typography.Title>
-                    </Dropdown>
-                </HeaderRight>
-            </Header>
-            <Main>
-                <ProductListScreen/>
-            </Main>
-        </Container>
-    )
+  return (
+    <Container>
+      <PageHeader />
+      <Main>
+        {/* 路由 */}
+        <Routes>
+          <Route path={'/projects'} element={<ProductListScreen />} />
+          <Route path={'/projects/:projectId/*'} element={<ProjectPage />} />
+          <Route
+            path="/"
+            element={<Navigate to="/projects" replace={true} />}
+          />
+        </Routes>
+      </Main>
+    </Container>
+  )
 }
+// pageHeader
+const PageHeader = () => {
+  const { logout, user } = useAuth()
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: <span onClick={logout}>注销</span>,
+    },
+  ]
+  return (
+    <Header between={true}>
+      <HeaderLeft gap={true}>
+        <SoftWareLogo width={'18rem'} color={'rgb(38,132,255'} />
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown menu={{ items }} placement="bottom">
+          <Typography.Title level={5} type="success">
+            Hi，{user?.name || '无'}
+          </Typography.Title>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
+  )
+}
+
+//
 const Container = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
