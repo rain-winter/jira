@@ -63,7 +63,10 @@ export const useArray = <T>(initialArray: T[]) => {
   }
 }
 
-export const useDocumentTitle = (title: string, keepOnUnmount: boolean = true) => {
+export const useDocumentTitle = (
+  title: string,
+  keepOnUnmount: boolean = true
+) => {
   // useRef 会一直保护document.title不变
   const oldTitle = useRef(document.title).current
 
@@ -105,3 +108,8 @@ export const useDocumentTitle = (title: string, keepOnUnmount: boolean = true) =
 //     }
 //   }, [])
 // }
+
+// * 重置路由
+export const resetRouter = () => {
+  window.location.href = window.location.origin
+}

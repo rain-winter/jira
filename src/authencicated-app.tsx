@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
-import { Dropdown, MenuProps, Typography } from 'antd'
+import { Button, Dropdown, MenuProps, Typography } from 'antd'
 import { Row } from 'components/lib'
 import { useAuth } from 'context/auth-context'
 import { ProductListScreen } from 'pages/product-list'
 // 渲染svg
 import { ReactComponent as SoftWareLogo } from 'assets/software-logo.svg'
 import { Routes, Route, Navigate } from 'react-router'
-import { redirect, BrowserRouter } from 'react-router-dom'
 import { ProjectPage } from 'pages/project'
+import { resetRouter } from 'utils'
 
 /**
  * 已经登录了直接来这
@@ -20,12 +20,9 @@ export const AuthencicatedApp = () => {
       <Main>
         {/* 路由 */}
         <Routes>
-          <Route path={'/projects'} element={<ProductListScreen />} />
-          <Route path={'/projects/:projectId/*'} element={<ProjectPage />} />
-          <Route
-            path="/"
-            element={<Navigate to="/projects" replace={true} />}
-          />
+          <Route path={'projects'} element={<ProductListScreen />} />
+          <Route path={'projects/:projectId/*'} element={<ProjectPage />} />
+          <Route path="/" element={<Navigate to="projects" />} />
         </Routes>
       </Main>
     </Container>
@@ -43,7 +40,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftWareLogo width={'18rem'} color={'rgb(38,132,255'} />
+        <Button type="link" onClick={resetRouter}>
+          <SoftWareLogo width={'18rem'} color={'rgb(38,132,255'} />
+        </Button>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>
