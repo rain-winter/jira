@@ -40,9 +40,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <Button type="link" onClick={resetRouter}>
-          <SoftWareLogo width={'18rem'} color={'rgb(38,132,255'} />
-        </Button>
+        {/* <Button type="link" onClick={resetRouter}> */}
+          <SoftWareLogo onClick={resetRouter} width={'18rem'} color={'rgb(38,132,255'} />
+        {/* </Button> */}
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>

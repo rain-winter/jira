@@ -51,4 +51,5 @@ export const register = (data: { username: string; password: string }) => {
 // 退出
 export const logout = async () => {
   window.localStorage.removeItem(localStorageKey)
+  window.location.href = '/'
 }

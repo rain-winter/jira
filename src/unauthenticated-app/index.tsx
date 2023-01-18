@@ -1,46 +1,48 @@
 import styled from '@emotion/styled'
-import {Button, Card, Divider, Typography} from 'antd'
+import { Button, Card, Divider, Typography } from 'antd'
 import left from 'assets/left.svg'
 import logo from 'assets/logo.svg'
 import right from 'assets/right.svg'
-import {useState} from 'react'
+import { useState } from 'react'
 import { useDocumentTitle } from 'utils'
-import {LoginPage} from './login'
-import {RegisterPage} from './register'
+import { LoginPage } from './login'
+import { RegisterPage } from './register'
 
 /**
  * 未授权的时候 来这里
  */
 export const UnanthenticatedApp = () => {
-    const [isRegister, setIsRegister] = useState(false)
-    const [error, setError] = useState<Error | null>(null)
+  const [isRegister, setIsRegister] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
 
+  useDocumentTitle('请登录注册再继续')
 
-    useDocumentTitle('登录注册再继续')
+  return (
+    <Container>
+      <Header />
+      <Background />
 
-    return (
-        <Container>
-            <Header/>
-            <Background/>
-            <Button onClick={() => {
-                throw new Error('点击抛出一个异常')
-            }
-            }>抛出异常</Button>
-            <ShadowCard>
-                <Title>{isRegister ? '请注册' : '请登录'}</Title>
+      <ShadowCard>
+        <Title>{isRegister ? '请注册' : '请登录'}</Title>
 
-                {error ? (
-                    <Typography.Text type="danger">{error.message}</Typography.Text>
-                ) : ('')}
+        {error ? (
+          <Typography.Text type="danger">{error.message}</Typography.Text>
+        ) : (
+          ''
+        )}
 
-                {isRegister ? <RegisterPage onError={setError}/> : <LoginPage onError={setError || null}/>}
-                <Divider/>
-                <Button type="link" onClick={() => setIsRegister(!isRegister)}>
-                    {isRegister ? '已有账号直接登录' : '没有账号？注册新账号'}
-                </Button>
-            </ShadowCard>
-        </Container>
-    )
+        {isRegister ? (
+          <RegisterPage onError={setError} />
+        ) : (
+          <LoginPage onError={setError || null} />
+        )}
+        <Divider />
+        <Button type="link" onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? '已有账号直接登录' : '没有账号？注册新账号'}
+        </Button>
+      </ShadowCard>
+    </Container>
+  )
 }
 
 export const LongButton = styled(Button)`
@@ -75,7 +77,7 @@ const Background = styled.div`
   background-attachment: fixed;
   background-position: left bottom, right bottom;
   background-size: calc(((100vw - 40rem) / 2) - 3.2rem),
-  calc(((100vw - 40rem) / 2) - 3.2rem), cover;
+    calc(((100vw - 40rem) / 2) - 3.2rem), cover;
   background-image: url(${left}), url(${right});
 `
 const Header = styled.header`

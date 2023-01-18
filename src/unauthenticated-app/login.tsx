@@ -21,6 +21,7 @@ export const LoginPage = ({ onError }: { onError: (error: Error) => void }) => {
     try {
       // await login(values)
       await run(login(values))
+      
     } catch (e: any) {
 		console.log(e)
       onError(e)

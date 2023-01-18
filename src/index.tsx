@@ -1,3 +1,4 @@
+import './why-did-you-render'; // <--- first import
 import { AppProviders } from 'context'
 import { DevTools, loadServer } from 'jira-dev-tool'
 import React from 'react'

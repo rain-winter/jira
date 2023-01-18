@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0",
-    "@types/qs": "^6.9.7"
+    "@types/qs": "^6.9.7",
+    "@welldone-software/why-did-you-render": "^7.0.1"
   }
 }
