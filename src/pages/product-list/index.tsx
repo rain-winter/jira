@@ -9,13 +9,13 @@ import { useUsers } from '../../utils/user'
 import { useUrlQueryParam } from 'utils/url'
 
 export const ProductListScreen = () => {
-  const [, setParam] = useState({
-    name: '',
-    personId: '',
-  })
+  // const [, setParam] = useState({
+  //   name: '',
+  //   personId: '',
+  // })
 
   const [keys] = useState<('name' | 'personId')[]>(['name', 'personId'])
-  const [param] = useUrlQueryParam(keys)
+  const [param, setParam] = useUrlQueryParam(keys)
   // const [param] = useUrlQueryParam(['name','personId']) 会死循环
 
   const debounceParam = useDebounce(param, 1200)
@@ -44,7 +44,7 @@ export const ProductListScreen = () => {
 }
 
 ProductListScreen.whyDidYouRender = true
-// TODO 相当于这个写法。用来检查哪里渲染
+// TODO whyDidYouRender 相当于这个写法。用来检查哪里渲染
 // class Test extends React.Component<any,any>{
 //   static whyDidYouRender= true
 // }
