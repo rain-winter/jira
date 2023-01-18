@@ -7,13 +7,16 @@ interface listProps extends TableProps<Project> {
   users: User[]
 }
 export interface Project {
-  id: string
+  id: number
   name: string
-  personId: string
+  personId: number
   pin: boolean
   organization: string
   created: number
 }
+
+
+
 export const List = ({ users, ...props }: listProps) => {
   return (
     <Table

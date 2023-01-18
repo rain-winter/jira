@@ -7,22 +7,20 @@ import { Typography } from 'antd'
 import { useProjects } from '../../utils/project'
 import { useUsers } from '../../utils/user'
 import { useUrlQueryParam } from 'utils/url'
+import { useProjectSeaechParam } from './util'
 
 export const ProductListScreen = () => {
-  // const [, setParam] = useState({
+  // const [, setParam] = useState({ 从useUrlQueryParam获取
   //   name: '',
   //   personId: '',
   // })
+  useDocumentTitle('任务列表')
 
-  const [keys] = useState<('name' | 'personId')[]>(['name', 'personId'])
-  const [param, setParam] = useUrlQueryParam(keys)
-  // const [param] = useUrlQueryParam(['name','personId']) 会死循环
+  const [param, setParam] = useProjectSeaechParam()
 
-  const debounceParam = useDebounce(param, 1200)
-  const { isLoading, error, data: list } = useProjects(debounceParam)
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 1500))
   const { data: users } = useUsers()
 
-  useDocumentTitle('任务列表')
   //  第一种写法
   // setParam(Object.assign({},param,{name:e.target.value}))
   // const {run, isLoading, error, data: list} = useAsync<Project[]>()
@@ -34,6 +32,15 @@ export const ProductListScreen = () => {
   return (
     <Container>
       <h1>项目列表</h1>
+      <select
+        onChange={(evt) => {
+          const value = evt.target.value
+          console.log(value, typeof value)
+        }}
+      >
+        <option value={undefined}>默认</option>
+        <option value={1}>1</option>
+      </select>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={'danger'}>{error.message}</Typography.Text>
