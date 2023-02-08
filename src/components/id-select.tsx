@@ -1,7 +1,7 @@
 import { Select } from 'antd'
 import { Raw } from 'types'
 
-// 获取 Select 组件上所有属性
+// TODO 获取 Select 组件上所有属性
 type SelectProps = React.ComponentProps<typeof Select>
 
 interface IdSelectProps

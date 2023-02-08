@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
-import { Button, Dropdown, MenuProps, Typography } from 'antd'
+import { Dropdown, MenuProps, Typography } from 'antd'
 import { Row } from 'components/lib'
 import { useAuth } from 'context/auth-context'
 import { ProductListScreen } from 'pages/product-list'
 // 渲染svg
 import { ReactComponent as SoftWareLogo } from 'assets/software-logo.svg'
-import { Routes, Route, Navigate } from 'react-router'
 import { ProjectPage } from 'pages/project'
+import { Navigate, Route, Routes } from 'react-router'
 import { resetRouter } from 'utils'
 
 /**
@@ -41,7 +41,11 @@ const PageHeader = () => {
     <Header between={true}>
       <HeaderLeft gap={true}>
         {/* <Button type="link" onClick={resetRouter}> */}
-          <SoftWareLogo onClick={resetRouter} width={'18rem'} color={'rgb(38,132,255'} />
+        <SoftWareLogo
+          onClick={resetRouter}
+          width={'18rem'}
+          color={'rgb(38,132,255'}
+        />
         {/* </Button> */}
         <h2>项目</h2>
         <h2>用户</h2>

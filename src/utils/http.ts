@@ -26,7 +26,11 @@ export const http = async (
     ...customerConfig,
   }
   if (config.method.toUpperCase() === 'GET') {
+    console.log(data)
     endpoint += `?${qs.stringify(data)}`
+    console.log('endpoint')
+    console.log(`${qs.stringify(data)}`)
+    console.log('endpoint')
   } else {
     config.body = JSON.stringify(data || {})
   }

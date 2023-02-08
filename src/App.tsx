@@ -1,12 +1,12 @@
-import { AuthencicatedApp } from 'authencicated-app'
-import { useAuth } from 'context/auth-context'
-import { UnanthenticatedApp } from 'unauthenticated-app'
-import { ErrorBoundary } from 'components/error-boundary'
-import './App.css'
 import { ConfigProvider } from 'antd'
 import 'antd/dist/reset.css'
-import { FullPageErrorFallBack } from './components/lib'
+import { AuthencicatedApp } from 'authencicated-app'
+import { ErrorBoundary } from 'components/error-boundary'
+import { useAuth } from 'context/auth-context'
 import { BrowserRouter } from 'react-router-dom'
+import { UnanthenticatedApp } from 'unauthenticated-app'
+import './App.css'
+import { FullPageErrorFallBack } from './components/lib'
 
 function App() {
   const { user } = useAuth()
@@ -18,13 +18,13 @@ function App() {
         },
       }}
     >
-        <ErrorBoundary fallBackRender={FullPageErrorFallBack}>
-      <BrowserRouter>
+      <ErrorBoundary fallBackRender={FullPageErrorFallBack}>
+        <BrowserRouter>
           <div className="App">
             {user ? <AuthencicatedApp /> : <UnanthenticatedApp />}
           </div>
-      </BrowserRouter>
-        </ErrorBoundary>
+        </BrowserRouter>
+      </ErrorBoundary>
     </ConfigProvider>
   )
 }

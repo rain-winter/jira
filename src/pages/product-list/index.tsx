@@ -1,12 +1,10 @@
 import styled from '@emotion/styled'
-import { useState } from 'react'
-import { useDebounce, useDocumentTitle } from 'utils'
-import { List } from './list'
-import { SearchPanel } from './search-panel'
 import { Typography } from 'antd'
+import { useDebounce, useDocumentTitle } from 'utils'
 import { useProjects } from '../../utils/project'
 import { useUsers } from '../../utils/user'
-import { useUrlQueryParam } from 'utils/url'
+import { List } from './list'
+import { SearchPanel } from './search-panel'
 import { useProjectSeaechParam } from './util'
 
 export const ProductListScreen = () => {
@@ -20,6 +18,7 @@ export const ProductListScreen = () => {
 
   const { isLoading, error, data: list } = useProjects(useDebounce(param, 1500))
   const { data: users } = useUsers()
+  console.log(users)
 
   //  第一种写法
   // setParam(Object.assign({},param,{name:e.target.value}))
@@ -32,15 +31,7 @@ export const ProductListScreen = () => {
   return (
     <Container>
       <h1>项目列表</h1>
-      <select
-        onChange={(evt) => {
-          const value = evt.target.value
-          console.log(value, typeof value)
-        }}
-      >
-        <option value={undefined}>默认</option>
-        <option value={1}>1</option>
-      </select>
+
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={'danger'}>{error.message}</Typography.Text>
@@ -50,7 +41,7 @@ export const ProductListScreen = () => {
   )
 }
 
-ProductListScreen.whyDidYouRender = true
+// ProductListScreen.whyDidYouRender = true
 // TODO whyDidYouRender 相当于这个写法。用来检查哪里渲染
 // class Test extends React.Component<any,any>{
 //   static whyDidYouRender= true

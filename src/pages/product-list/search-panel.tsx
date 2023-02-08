@@ -3,7 +3,7 @@ import { UserSelect } from 'components/user-select'
 import { Project } from './list'
 interface SearchPanelProps {
   users: User[]
-  param: Partial<Pick<Project, "name" | "personId">>;
+  param: Partial<Pick<Project, 'name' | 'personId'>>
   // param: {
   //   name: string
   //   personId: string
@@ -19,6 +19,8 @@ export interface User {
 }
 
 export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
+  // console.log(users)
+  // console.log(param)
   return (
     <Form layout="inline" style={{ marginBottom: '2rem' }}>
       <Form.Item>
@@ -38,14 +40,19 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
         <UserSelect
           defaultOptionName="负责人"
           value={param.personId}
-          onChange={(value) =>
+          onChange={(value) => {
+            console.log(value)
+            console.log(param)
+
             setParam({
               ...param,
               personId: value,
             })
-          }
+            console.log(param)
+
+          }}
         />
-        {/* <select value={param.personId} onChange={}>
+        {/* <select value={param.personId} onChange={()=>null}>
           <option value={''}>负责人</option>
           {users.map((user) => (
             <option key={user.id} value={user.id}>
