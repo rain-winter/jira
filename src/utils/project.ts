@@ -1,20 +1,53 @@
-import {useEffect} from "react";
-import {cleanObject} from "./index";
-import {Project} from "../pages/product-list/list";
-import {useHttp} from "./http";
-import {useAsync} from "./use-async";
+import { useHttp } from "utils/http";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { Project } from "types";
 
-/**
- * 发送请求，并把data、error、setData等返回出去
- * @param param Partial<Project>
- */
 export const useProjects = (param?: Partial<Project>) => {
-    const client = useHttp()
-    // data，error，setData被解构成 result
-    const {run, ...result} = useAsync<Project[]>()
-    useEffect(() => {
-        run(client('projects', {data: cleanObject(param) || []}))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [param])
-    return result
-}
+  const client = useHttp();
+
+  return useQuery<Project[]>(["projects", param], () =>
+    client("projects", { data: param })
+  );
+};
+
+export const useEditProject = () => {
+  const client = useHttp();
+  const queryClient = useQueryClient();
+  return useMutation(
+    (params: Partial<Project>) =>
+      client(`projects/${params.id}`, {
+        method: "PATCH",
+        data: params,
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
+};
+
+export const useAddProject = () => {
+  const client = useHttp();
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (params: Partial<Project>) =>
+      client(`projects`, {
+        data: params,
+        method: "POST",
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
+};
+
+export const useProject = (id?: number) => {
+  const client = useHttp();
+  return useQuery<Project>(
+    ["project", { id }],
+    () => client(`projects/${id}`),
+    {
+      enabled: Boolean(id),
+    }
+  );
+};

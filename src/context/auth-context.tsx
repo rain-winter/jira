@@ -1,84 +1,77 @@
-import * as auth from 'auth-provider'
-import { FullPageErrorFallBack, FullPageLoading } from 'components/lib'
-import { DevTools } from 'jira-dev-tool'
-import { User } from 'pages/product-list/search-panel'
-import React, { ReactNode } from 'react'
-import { useMount } from 'utils'
-import { http } from 'utils/http'
-import { useAsync } from 'utils/use-async'
+import React, { ReactNode } from "react";
+import * as auth from "auth-provider";
+import { User } from "types";
+import { http } from "utils/http";
+import { useMount } from "utils";
+import { useAsync } from "utils/use-async";
+import { FullPageErrorFallback, FullPageLoading } from "components/lib";
 
-export interface AuthForm {
-  username: string
-  password: string
+interface AuthForm {
+  username: string;
+  password: string;
 }
 
 const bootstrapUser = async () => {
-  let user = null
-  const token = auth.getToken()
+  let user = null;
+  const token = auth.getToken();
   if (token) {
-    const data = await http('me', { token })
-    user = data.user
+    const data = await http("me", { token });
+    user = data.user;
   }
-  return user
-}
+  return user;
+};
 
 const AuthContext = React.createContext<
   | {
-    user: User | null
-    register: (form: AuthForm) => void
-    login: (form: AuthForm) => Promise<void>
-    logout: () => Promise<void>
-  }
+      user: User | null;
+      register: (form: AuthForm) => Promise<void>;
+      login: (form: AuthForm) => Promise<void>;
+      logout: () => Promise<void>;
+    }
   | undefined
->(undefined)
+>(undefined);
+AuthContext.displayName = "AuthContext";
 
-AuthContext.displayName = 'AuthContext'
-
-// AuthProvider包裹最外面的app
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const {
-    run,
-    isLoading,
-    error,
-    isError,
     data: user,
-    setData: setUser,
+    error,
+    isLoading,
     isIdle,
-  } = useAsync<User | null>()
-  //    point free
-  //   (form: AuthForm) => auth.login(form).then(user => setUser(user)) 写法相等
-  const login = (form: AuthForm) => auth.login(form).then(setUser)
-  const register = (form: AuthForm) => auth.register(form).then(setUser)
-  const logout = () => auth.logout().then(() => setUser(null))
-  useMount(() => {
-    run(bootstrapUser())
-  })
+    isError,
+    run,
+    setData: setUser,
+  } = useAsync<User | null>();
 
-  // 初始状态和正在加载 显示loading
+  // point free
+  const login = (form: AuthForm) => auth.login(form).then(setUser);
+  const register = (form: AuthForm) => auth.register(form).then(setUser);
+  const logout = () => auth.logout().then(() => setUser(null));
+
+  useMount(() => {
+    run(bootstrapUser());
+  });
+
   if (isIdle || isLoading) {
-    return <FullPageLoading />
+    return <FullPageLoading />;
   }
+
   if (isError) {
-    console.log('auth-context' + isError)
-    return (
-      <div>
-        <FullPageErrorFallBack error={error} />
-        <DevTools />
-      </div>
-    )
+    return <FullPageErrorFallback error={error} />;
   }
 
   return (
     <AuthContext.Provider
       children={children}
-      value={{ user, login, logout, register }}
+      value={{ user, login, register, logout }}
     />
-  )
-}
+  );
+};
+
 export const useAuth = () => {
-  const context = React.useContext(AuthContext)
+  const context = React.useContext(AuthContext);
   if (!context) {
-    throw new Error('context必须在 AuthProvider 调用')
+    throw new Error("useAuth必须在AuthProvider中使用");
   }
-  return context
-}
+  return context;
+};

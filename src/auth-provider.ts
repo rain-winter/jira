@@ -1,55 +1,52 @@
-import { User } from 'pages/product-list/search-panel'
+// 在真实环境中，如果使用firebase这种第三方auth服务的话，本文件不需要开发者开发
 
-/**
- * 封装了登录注册退出、获取token等方法
- */
-// 真实环境，使用firebase这种第三方auth服务，这个文件不需要开发
-const localStorageKey = '__auth_provider_token__'
-const apiUrl = process.env.REACT_APP_API_URL
+import { User } from "types";
 
-//获取token
-export const getToken = () => window.localStorage.getItem(localStorageKey)
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
+const localStorageKey = "__auth_provider_token__";
+
+export const getToken = () => window.localStorage.getItem(localStorageKey);
+
 export const handleUserResponse = ({ user }: { user: User }) => {
-  window.localStorage.setItem(localStorageKey, user.token || '')
-  return user
-}
+  window.localStorage.setItem(localStorageKey, user.token || "");
+  return user;
+};
 
-// 登录
 export const login = (data: { username: string; password: string }) => {
+  console.log(apiUrl);
+  
   return fetch(`${apiUrl}/login`, {
-    method: 'post',
+    method: "POST",
     headers: {
-      'content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json())
+  }).then(async (response) => {
+    if (response.ok) {
+      return handleUserResponse(await response.json());
     } else {
-      return Promise.reject(await res.json())
+      return Promise.reject(await response.json());
     }
-  })
-}
+  });
+};
 
-// 注册
 export const register = (data: { username: string; password: string }) => {
   return fetch(`${apiUrl}/register`, {
-    method: 'post',
+    method: "POST",
     headers: {
-      'content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
-  }).then(async (res) => {
-    if (res.ok) {
-      return handleUserResponse(await res.json())
+  }).then(async (response) => {
+    if (response.ok) {
+      return handleUserResponse(await response.json());
     } else {
-      return Promise.reject(await res.json())
+      return Promise.reject(await response.json());
     }
-  })
-}
+  });
+};
 
-// 退出
-export const logout = async () => {
-  window.localStorage.removeItem(localStorageKey)
-  window.location.href = '/'
-}
+export const logout = async () =>
+  window.localStorage.removeItem(localStorageKey);

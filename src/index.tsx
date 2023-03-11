@@ -1,10 +1,12 @@
-import './why-did-you-render'; // <--- first import
-import { AppProviders } from 'context'
-import { DevTools, loadServer } from 'jira-dev-tool'
+import './wdyr'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { DevTools, loadServer } from 'jira-dev-tool'
+// 务必在jira-dev-tool后面引入
+import 'antd/dist/reset.css'
+import { AppProviders } from 'context'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
