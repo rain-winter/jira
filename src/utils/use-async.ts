@@ -62,7 +62,7 @@ export const useAsync = <D>(
     [safeDispatch]
   );
 
-  // run 用来触发异步请求
+  // run 用来触发异步请求 runConfig是一个对象
   const run = useCallback(
     (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
       if (!promise || !promise.then) {

@@ -1,14 +1,14 @@
+import React from 'react'
 import { Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { ListProps } from 'types'
 import dayjs from 'dayjs'
-import React from 'react'
 import { Pin } from 'components/pin'
 import { useEditProject } from 'utils/project'
 
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject()
-  const pinProject = (id: number) => (pin: boolean) => mutate(id, pin)
+  const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}).then(props.refresh)
   return (
     <Table
       rowKey={'id'}

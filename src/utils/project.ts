@@ -12,8 +12,14 @@ import { Project } from 'types'
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp()
   const { run, ...result } = useAsync<Project[]>()
+
+  const fetchProjects = () =>
+    client('projects', { data: cleanObject(param || {}) })
+
   useEffect(() => {
-    run(client('projects', { data: cleanObject(param || {}) }))
+    run(fetchProjects(), {
+      retry: fetchProjects,
+    })
   }, [param])
   return result
   // return useQuery<Project[]>(["projects", param], () =>

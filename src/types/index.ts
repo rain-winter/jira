@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
-export type Raw = string | number;
-import React from 'react';
+export type Raw = string | number
+import React from 'react'
 import { TableProps } from 'antd/es/table'
-import { Rate, Select } from 'antd';
+import { Rate, Select } from 'antd'
 export interface User {
   id: number
   name: string
@@ -29,6 +29,7 @@ export interface SearchPanelProps {
 
 export interface ListProps extends TableProps<Project> {
   users: User[]
+  refresh?: () => void
 }
 
 //获取类型
@@ -45,6 +46,6 @@ export interface IdSelectProps
 
 // 五角星组件
 export interface PinProps extends React.ComponentProps<typeof Rate> {
-  checked: boolean;
-  onCheckedChange?: (checked: boolean) => void;
+  checked: boolean
+  onCheckedChange?: (checked: boolean) => void
 }
