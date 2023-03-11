@@ -1,11 +1,12 @@
-import React from "react";
-import { Rate } from "antd";
+import React from 'react'
+import { Rate } from 'antd'
+import { PinProps } from 'types'
 
-interface PinProps extends React.ComponentProps<typeof Rate> {
-  checked: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-}
-
+/**
+ * 星星组件
+ * @param param
+ * @returns
+ */
 export const Pin = ({ checked, onCheckedChange, ...restProps }: PinProps) => {
   return (
     <Rate
@@ -14,5 +15,5 @@ export const Pin = ({ checked, onCheckedChange, ...restProps }: PinProps) => {
       onChange={(num) => onCheckedChange?.(!!num)}
       {...restProps}
     />
-  );
-};
+  )
+}

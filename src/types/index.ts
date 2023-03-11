@@ -2,7 +2,7 @@
 export type Raw = string | number;
 import React from 'react';
 import { TableProps } from 'antd/es/table'
-import { Select } from 'antd';
+import { Rate, Select } from 'antd';
 export interface User {
   id: number
   name: string
@@ -41,4 +41,10 @@ export interface IdSelectProps
   onChange?: (value?: number) => void
   defaultOptionName?: string
   options?: { name: string; id: number }[]
+}
+
+// 五角星组件
+export interface PinProps extends React.ComponentProps<typeof Rate> {
+  checked: boolean;
+  onCheckedChange?: (checked: boolean) => void;
 }

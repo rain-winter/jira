@@ -8,6 +8,7 @@ import { cleanObject, subset } from "utils/index";
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   const [searchParams, setSearchParam] = useSearchParams();
   const [stateKeys] = useState(keys);
+  
   return [
     useMemo(
       () =>
@@ -15,7 +16,8 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
           [key in K]: string;
         },
       [searchParams, stateKeys]
-    ),
+    )
+    ,
       (params: Partial<{ [key in K]: unknown }>) => {
       // iterator
       // iterator: https://codesandbox.io/s/upbeat-wood-bum3j?file=/src/index.js
