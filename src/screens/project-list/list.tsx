@@ -1,14 +1,16 @@
 import React from 'react'
-import { Table } from 'antd'
+import { Dropdown, MenuProps, Table } from 'antd'
 import { Link } from 'react-router-dom'
 import { ListProps } from 'types'
 import dayjs from 'dayjs'
 import { Pin } from 'components/pin'
 import { useEditProject } from 'utils/project'
+import { ButtonNoPadding } from 'components/lib'
 
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject()
-  const pinProject = (id: number) => (pin: boolean) => mutate({id, pin}).then(props.refresh)
+  const pinProject = (id: number) => (pin: boolean) =>
+    mutate({ id, pin }).then(props.refresh)
   return (
     <Table
       rowKey={'id'}
@@ -56,6 +58,29 @@ export const List = ({ users, ...props }: ListProps) => {
                   ? dayjs(project.created).format('YYYY-MM-DD')
                   : '无'}
               </span>
+            )
+          },
+        },
+        {
+          title: '更多',
+          render(value, project) {
+            const items: MenuProps['items'] = [
+              {
+                key: '1',
+                label: (
+                  <ButtonNoPadding
+                    type="link"
+                    onClick={() => props.setProjectModalOpen(true)}
+                  >
+                    编辑
+                  </ButtonNoPadding>
+                ),
+              },
+            ]
+            return (
+              <Dropdown menu={{ items }}>
+                <ButtonNoPadding type="link">...</ButtonNoPadding>
+              </Dropdown>
             )
           },
         },

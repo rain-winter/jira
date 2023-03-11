@@ -30,7 +30,6 @@ export const cleanObject = (object: { [key: string]: unknown }) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
@@ -130,6 +129,7 @@ export const subset = <
 
 /**
  * 返回组件的挂载状态，如果还没挂载或者已经卸载，返回false；反之，返回true
+ * 卸载的时候 就不要发请求了，不然会报错
  */
 export const useMountedRef = () => {
   const mountedRef = useRef(false);
