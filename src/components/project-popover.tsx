@@ -5,9 +5,9 @@ import styled from '@emotion/styled'
 import { ButtonNoPadding } from './lib'
 // 把pover抽象成组件，避免直接写在authenticated-app
 export const ProjectPopover = ({
-  setProjectModalOpen,
+  projectButton,
 }: {
-  setProjectModalOpen: (isOpen: boolean) => void
+  projectButton: JSX.Element
 }) => {
   const { data: projects, isLoading } = useProjects()
   const pinnedProjects = projects?.filter((item) => item.pin)
@@ -23,9 +23,9 @@ export const ProjectPopover = ({
       </List>
       <Divider />
       {/* TODO onClick={() => setProjectModalOpen(true)} */}
-      <ButtonNoPadding onClick={() => setProjectModalOpen(true)} type="link">
-        创建项目
-      </ButtonNoPadding>
+      {
+        projectButton
+      }
     </ContentContainer>
   )
   return (

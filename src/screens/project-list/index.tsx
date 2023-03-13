@@ -14,7 +14,7 @@ import { ButtonNoPadding, ErrorBox, Row } from 'components/lib'
 // https://codesandbox.io/s/keen-wave-tlz9s?file=/src/App.js
 
 export const ProjectListScreen = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void
+  projectButton: JSX.Element
 }) => {
   useDocumentTitle('项目列表', false)
 
@@ -33,17 +33,14 @@ export const ProjectListScreen = (props: {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <ButtonNoPadding
-          onClick={() => props.setProjectModalOpen(true)}
-          type={'link'}
-        >
-          创建项目
-        </ButtonNoPadding>
+        {
+          props.projectButton
+        }
       </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       <ErrorBox error={error} />
       <List
-        setProjectModalOpen={props.setProjectModalOpen}
+        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         users={users || []}

@@ -67,14 +67,7 @@ export const List = ({ users, ...props }: ListProps) => {
             const items: MenuProps['items'] = [
               {
                 key: '1',
-                label: (
-                  <ButtonNoPadding
-                    type="link"
-                    onClick={() => props.setProjectModalOpen(true)}
-                  >
-                    编辑
-                  </ButtonNoPadding>
-                ),
+                label: props.projectButton,
               },
             ]
             return (
