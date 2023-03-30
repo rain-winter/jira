@@ -8,15 +8,20 @@ import { DevTools, loadServer } from 'jira-dev-tool'
 import 'antd/dist/reset.css'
 import { AppProviders } from 'context'
 
+import { Provider } from 'react-redux'
+import { store } from './store/index'
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 loadServer(() =>
   root.render(
     // <React.StrictMode>
+    <Provider store={store}>
       <AppProviders>
         <DevTools />
         <App />
       </AppProviders>
+    </Provider>
     // </React.StrictMode>
   )
 )

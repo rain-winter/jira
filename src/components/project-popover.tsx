@@ -2,13 +2,8 @@ import React from 'react'
 import { Divider, List, Popover, Typography } from 'antd'
 import { useProjects } from 'utils/project'
 import styled from '@emotion/styled'
-import { ButtonNoPadding } from './lib'
 // 把pover抽象成组件，避免直接写在authenticated-app
-export const ProjectPopover = ({
-  projectButton,
-}: {
-  projectButton: JSX.Element
-}) => {
+export const ProjectPopover = () => {
   const { data: projects, isLoading } = useProjects()
   const pinnedProjects = projects?.filter((item) => item.pin)
   const content = (
@@ -23,9 +18,6 @@ export const ProjectPopover = ({
       </List>
       <Divider />
       {/* TODO onClick={() => setProjectModalOpen(true)} */}
-      {
-        projectButton
-      }
     </ContentContainer>
   )
   return (

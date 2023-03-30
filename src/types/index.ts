@@ -50,3 +50,8 @@ export interface PinProps extends React.ComponentProps<typeof Rate> {
   checked: boolean
   onCheckedChange?: (checked: boolean) => void
 }
+
+
+export interface ProjectListState {
+  projectModalOpen: boolean
+}

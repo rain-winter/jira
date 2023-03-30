@@ -11,6 +11,8 @@ import { ProjectScreen } from 'screens/project'
 import { resetRoute } from 'utils'
 import { ProjectModal } from 'screens/project-list/project-modal'
 import { ProjectPopover } from 'components/project-popover'
+import { useDispatch } from 'react-redux'
+import { projectListActions } from 'screens/project-list/project-list.slice'
 
 /**
  * grid 和 flex 各自的应用场景
@@ -27,22 +29,16 @@ import { ProjectPopover } from 'components/project-popover'
 // prop drilling PageHeader传递给ProjectPopover,最后在List中使用
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false)
+  // 使用了状态管理就不需要这个了
+  // const [projectModalOpen, setProjectModalOpen] = useState(false)
+
+  const dispatch = useDispatch()
 
   return (
     <Container>
       <Router>
         {/* 1. PageHeader传递setProjectModalOpen */}
-        <PageHeader
-          projectButton={
-            <ButtonNoPadding
-              type="link"
-              onClick={() => setProjectModalOpen(true)}
-            >
-              创建项目
-            </ButtonNoPadding>
-          }
-        />
+        <PageHeader />
         <Main>
           <Routes>
             <Route
@@ -51,8 +47,10 @@ export const AuthenticatedApp = () => {
                 <ProjectListScreen
                   projectButton={
                     <ButtonNoPadding
+                      onClick={() =>
+                        dispatch(projectListActions.openProjectModal())
+                      }
                       type="link"
-                      onClick={() => setProjectModalOpen(true)}
                     >
                       创建项目
                     </ButtonNoPadding>
@@ -67,16 +65,13 @@ export const AuthenticatedApp = () => {
             <Route path="/" element={<Navigate to="projects" />} />
           </Routes>
         </Main>
-        <ProjectModal
-          projectModalOpen={projectModalOpen}
-          onClose={() => setProjectModalOpen(false)}
-        />
+        <ProjectModal />
       </Router>
     </Container>
   )
 }
 // 2.
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
@@ -84,7 +79,7 @@ const PageHeader = (props: { projectButton: JSX.Element }) => {
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </ButtonNoPadding>
         {/* 3. */}
-        <ProjectPopover projectButton={props.projectButton} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>

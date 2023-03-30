@@ -71,7 +71,7 @@ export const List = ({ users, ...props }: ListProps) => {
               const items: MenuProps['items'] = [
                 {
                   key: '1',
-                  label: props.projectButton,
+                  label: '编辑',
                 },
               ]
               return (
