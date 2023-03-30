@@ -30,7 +30,7 @@ export interface SearchPanelProps {
 export interface ListProps extends TableProps<Project> {
   users: User[]
   refresh?: () => void
-  projectButton: JSX.Element
+  projectButton?: JSX.Element
 }
 
 //获取类型
