@@ -1,8 +1,15 @@
 /* eslint-disable import/first */
-export type Raw = string | number
 import React from 'react'
+
+export type Raw = string | number
 import { TableProps } from 'antd/es/table'
 import { Rate, Select } from 'antd'
+
+export interface AuthForm {
+  username: string;
+  password: string;
+}
+
 export interface User {
   id: number
   name: string

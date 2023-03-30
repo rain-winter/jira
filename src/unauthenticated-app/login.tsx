@@ -3,6 +3,7 @@ import { Form, Input } from "antd";
 import { LongButton } from "unauthenticated-app/index";
 import { useAsync } from "utils/use-async";
 import React from "react";
+import { useDispatch } from "react-redux";
 // interface Base {
 //   id: number
 // }
@@ -24,6 +25,7 @@ export const LoginScreen = ({
 }: {
   onError: (error: Error) => void;
 }) => {
+  const dispatch = useDispatch()
   const { login, user } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
@@ -32,7 +34,7 @@ export const LoginScreen = ({
     username: string;
     password: string;
   }) => {
-    try {
+     try {
       await run(login(values));
     } catch (e:any) {
       onError(e);
