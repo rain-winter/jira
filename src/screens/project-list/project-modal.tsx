@@ -6,6 +6,8 @@ import { projectListActions, selectProjectModalOpen } from './project-list.slice
 export const ProjectModal = () => {
   const dispatch = useDispatch()
   const projectModalOpen =useSelector(selectProjectModalOpen)
+  
+
   return (
     <Drawer
       onClose={() => dispatch(projectListActions.closeProjectModal())}

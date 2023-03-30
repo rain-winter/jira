@@ -23,6 +23,10 @@ export const authSlice = createSlice({
 
 const { setUser } = authSlice.actions
 
+/**
+ * 使用redux-thunk管理状态
+ */
+
 export const selectUser = (state: RootState) => state.auth.user
 
 export const login = (form: AuthForm) => (dispatch: AppDispatch) =>
