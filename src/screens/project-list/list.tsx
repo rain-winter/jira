@@ -1,16 +1,16 @@
-import React from 'react'
-import { Dropdown, MenuProps, Table } from 'antd'
-import { Link } from 'react-router-dom'
-import { ListProps } from 'types'
-import dayjs from 'dayjs'
-import { Pin } from 'components/pin'
-import { useEditProject } from 'utils/project'
+import { Button, Dropdown, MenuProps, Modal, Table } from 'antd'
 import { ButtonNoPadding } from 'components/lib'
+import { Pin } from 'components/pin'
+import dayjs from 'dayjs'
+import { Link } from 'react-router-dom'
+import { ListProps, Project } from 'types'
+import { useDelProject, useEditProject } from 'utils/project'
+import { useProjectModal } from './util'
 
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject()
-  const pinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh)
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin })
+
   return (
     <Table
       rowKey={'id'}
@@ -64,21 +64,50 @@ export const List = ({ users, ...props }: ListProps) => {
         {
           title: '更多',
           render(value, project) {
-            const items: MenuProps['items'] = [
-              {
-                key: '1',
-                label: props.projectButton,
-              },
-            ]
-            return (
-              <Dropdown menu={{ items }}>
-                <ButtonNoPadding type="link">...</ButtonNoPadding>
-              </Dropdown>
-            )
+            return <More project={project} />
           },
         },
       ]}
       {...props}
     />
+  )
+}
+
+const More = ({ project }: { project: Project }) => {
+  const { startEdit } = useProjectModal()
+  const editProject = (id: number) => () => startEdit(id)
+  const { mutate: delProject } = useDelProject()
+  const confimDelProject = (id: number) => {
+    Modal.confirm({
+      title: '确定删除这个项目吗',
+      content: '点击确定删除',
+      okText: '确定',
+      onOk() {
+        delProject(id)
+      },
+    })
+  }
+  const items: MenuProps['items'] = [
+    {
+      key: 'edit',
+      label: (
+        <Button type="text" onClick={editProject(project.id)}>
+          编辑
+        </Button>
+      ),
+    },
+    {
+      key: 'del',
+      label: (
+        <Button onClick={() => confimDelProject(project.id)} type="text" danger>
+          删除
+        </Button>
+      ),
+    },
+  ]
+  return (
+    <Dropdown menu={{ items }}>
+      <ButtonNoPadding type="link">...</ButtonNoPadding>
+    </Dropdown>
   )
 }

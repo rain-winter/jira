@@ -1,7 +1,6 @@
-import { useUrlQueryParam } from 'utils/url'
 import { useMemo } from 'react'
 import { useProject } from 'utils/project'
-import { useSearchParams } from 'react-router-dom'
+import { useSetUrlSearchParam, useUrlQueryParam } from 'utils/url'
 
 // 项目列表搜索的参数
 export const useProjectsSearchParams = () => {
@@ -15,6 +14,7 @@ export const useProjectsSearchParams = () => {
   ] as const
 }
 
+// TODO 使用url参数管理状态
 export const useProjectModal = () => {
   /**
    * 这段代码使用了React Hooks中的useUrlQueryParam自定义Hook，用于获取和设置URL参数。
@@ -25,12 +25,35 @@ export const useProjectModal = () => {
   const [{ projectCreate }, setProjectCreate] = useUrlQueryParam([
     'projectCreate',
   ])
+  // 正在编辑的时候 有id
+  const [{ editingProjectId }, setEditingProjectId] = useUrlQueryParam([
+    'editingProjectId',
+  ])
+
   const open = () => setProjectCreate({ projectCreate: true })
-  const close = () => setProjectCreate({ projectCreate: false })
+
+  const setUrlParams = useSetUrlSearchParam()
+
+  const close = () =>
+    setUrlParams({
+      projectCreate: '',
+      editingProjectId: '',
+    })
+  // 获取编辑的项目详情
+  const { data: editingProject, isLoading } = useProject(
+    Number(editingProjectId)
+  )
+
+  const startEdit = (id: number) =>
+    setEditingProjectId({ editingProjectId: id })
+
   // return [projectCreate === 'true', open, close]
   return {
     close,
     open,
-    projectModalOpen: projectCreate === 'true',
+    projectModalOpen: projectCreate === 'true' || Boolean(editingProjectId),
+    editingProject,
+    isLoading,
+    startEdit,
   }
 }

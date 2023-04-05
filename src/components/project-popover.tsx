@@ -8,16 +8,16 @@ import { useProjectModal } from 'screens/project-list/util'
 export const ProjectPopover = () => {
   const { open } = useProjectModal()
   const { data: projects } = useProjects()
-  const pinnedProjects = projects?.filter((item) => item.pin)
+  // const pinnedProjects = projects?.filter((item) => item.pin)
   const content = (
     <ContentContainer>
       <Typography.Text type="secondary">收藏项目</Typography.Text>
       <List>
-        {pinnedProjects?.map((project) => (
+        {/* {pinnedProjects?.map((project) => (
           <List.Item key={project.id}>
             <List.Item.Meta title={project.name} />
           </List.Item>
-        ))}
+        ))} */}
       </List>
       <Divider />
       <ButtonNoPadding onClick={open} type="link">

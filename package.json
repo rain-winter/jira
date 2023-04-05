@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@tanstack/react-query": "^4.28.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -33,7 +34,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json-server": "json-server __json_server_mock__/db.json  --middlewares ./__json_server_mock__/middleware.js --watch --port 3001"
-
   },
   "eslintConfig": {
     "extends": [
@@ -42,7 +42,7 @@
     ],
     "rules": {
       "react-hooks/exhaustive-deps": "off",
-			"react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off"
     }
   },
   "browserslist": {
