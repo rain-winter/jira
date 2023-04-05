@@ -17,7 +17,11 @@ export const ProjectModal = () => {
   const onFinish = async (values: any) => {
     await mutateAsync({ ...editingProject, ...values })
     close()
+  }
+
+  const closeModal = () => {
     form.resetFields()
+    close()
   }
 
   useEffect(() => {
@@ -25,7 +29,7 @@ export const ProjectModal = () => {
   }, [editingProject, form])
 
   return (
-    <Drawer onClose={close} open={projectModalOpen}>
+    <Drawer onClose={closeModal} open={projectModalOpen}>
       {isLoading ? (
         <Spin size="large" />
       ) : (

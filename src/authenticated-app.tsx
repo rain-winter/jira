@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import { ProjectListScreen } from 'screens/project-list'
-import { useAuth } from 'context/auth-context'
-import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg'
 import styled from '@emotion/styled'
-import { ButtonNoPadding, Row } from 'components/lib'
 import { Button, Dropdown, MenuProps } from 'antd'
+import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg'
+import { ButtonNoPadding, Row } from 'components/lib'
+import { ProjectPopover } from 'components/project-popover'
+import { useAuth } from 'context/auth-context'
 import { Navigate, Route, Routes } from 'react-router'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ProjectScreen } from 'screens/project'
-import { resetRoute } from 'utils'
+import { ProjectListScreen } from 'screens/project-list'
 import { ProjectModal } from 'screens/project-list/project-modal'
-import { ProjectPopover } from 'components/project-popover'
+import { resetRoute } from 'utils'
 
 /**
  * grid 和 flex 各自的应用场景
