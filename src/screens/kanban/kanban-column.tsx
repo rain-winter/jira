@@ -6,7 +6,7 @@ import { Kanban } from 'types'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
 import { CreateTask } from './create-task'
-import { useTaskSearchParams } from './util'
+import { useTaskSearchParams, useTasksModal } from './util'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
@@ -20,18 +20,15 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTaskSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
-  /**
- * id: 5
-name: "hello"
-ownerId: 2087867441
-projectId: 2
- */
+
+  const { startEdit } = useTasksModal()
+
   return (
     <Container>
       <TasksContainer>
         {kanban.name}
         {tasks?.map((task) => (
-          <Card key={task.id} size="small">
+          <Card onClick={() => startEdit(task.id)} key={task.id} size="small">
             {task.name}
             <TaskTypeIcon id={task.typeId} />
           </Card>

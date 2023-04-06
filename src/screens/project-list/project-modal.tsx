@@ -29,12 +29,13 @@ export const ProjectModal = () => {
   }, [editingProject, form])
 
   return (
-    <Drawer onClose={closeModal} open={projectModalOpen}>
+    <Drawer onClose={closeModal} open={projectModalOpen} forceRender={true}>
       {isLoading ? (
         <Spin size="large" />
       ) : (
         <>
           <h1>{title}</h1>
+
           <Form form={form} layout="vertical" onFinish={onFinish}>
             <Form.Item
               label="名称"

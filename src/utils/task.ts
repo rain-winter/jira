@@ -25,3 +25,27 @@ export const useAddTask = () => {
     }
   )
 }
+
+export const useTask = (id: number) => {
+  const client = useHttp()
+
+  return useQuery<Task>(['task', { id }], () => client(`tasks/${id}`), {
+    enabled: !!id,
+  })
+}
+
+export const useEditTask = () => {
+  const client = useHttp()
+  const queryClient = useQueryClient()
+
+  return useMutation(
+    (params: Partial<Task>) =>
+      client(`tasks/${params.id}`, {
+        method: 'PATCH',
+        data: params,
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries('tasks'),
+    }
+  )
+}
