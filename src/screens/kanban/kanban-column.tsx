@@ -1,9 +1,11 @@
 import styled from '@emotion/styled'
+import { Card } from 'antd'
 import bugIcon from 'assets/bug.svg'
 import taskIcon from 'assets/task.svg'
 import { Kanban } from 'types'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
+import { CreateTask } from './create-task'
 import { useTaskSearchParams } from './util'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
@@ -12,7 +14,7 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
   if (!name) {
     return null
   }
-  return <img alt="" src={name === 'task' ? taskIcon : bugIcon} />
+  return <Image alt="" src={name === 'task' ? taskIcon : bugIcon} />
 }
 
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
@@ -29,11 +31,12 @@ projectId: 2
       <TasksContainer>
         {kanban.name}
         {tasks?.map((task) => (
-          <Item key={task.id}>
+          <Card key={task.id} size="small">
             {task.name}
             <TaskTypeIcon id={task.typeId} />
-          </Item>
+          </Card>
         ))}
+        <CreateTask kanbanId={kanban.id} />
       </TasksContainer>
     </Container>
   )
@@ -58,8 +61,8 @@ const TasksContainer = styled.div`
   }
 `
 
-const Item = styled.div`
-  background-color: #fff;
-  padding: 10px;
-  margin-top: 10px;
+const Image = styled.img`
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: 0.5rem;
 `

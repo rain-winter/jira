@@ -27,6 +27,7 @@ export const SearchPanel = () => {
         onChange={(e) => setSearchParams({ name: e.target.value })}
       />
       <UserSelect
+        value={searchParams.processorId}
         defaultOptionName={'经办人'}
         onChange={(value) => setSearchParams({ processorId: value })}
       />
