@@ -18,15 +18,24 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTaskSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
+  /**
+ * id: 5
+name: "hello"
+ownerId: 2087867441
+projectId: 2
+ */
   return (
-    <div>
-      {tasks?.map((task) => (
-        <div>
-          {task.name}
-          <TaskTypeIcon id={task.typeId} />
-        </div>
-      ))}
-    </div>
+    <Container>
+      <TasksContainer>
+        {kanban.name}
+        {tasks?.map((task) => (
+          <Item key={task.id}>
+            {task.name}
+            <TaskTypeIcon id={task.typeId} />
+          </Item>
+        ))}
+      </TasksContainer>
+    </Container>
   )
 }
 
@@ -47,4 +56,10 @@ const TasksContainer = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+`
+
+const Item = styled.div`
+  background-color: #fff;
+  padding: 10px;
+  margin-top: 10px;
 `

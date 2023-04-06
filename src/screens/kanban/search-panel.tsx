@@ -17,7 +17,7 @@ export const SearchPanel = () => {
   }
 
   return (
-    <Space>
+    <Space style={{ marginBottom: '20px' }}>
       <Input
         style={{
           width: '200px',
