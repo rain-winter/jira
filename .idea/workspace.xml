@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d10336-bc4f-4338-9914-7c08daf6dede" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/screens/project-list/project-list.slice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/kanban/search-panel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/kanban/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/kanban/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -33,12 +38,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Project/jira&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\Project\\jira\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -53,6 +59,11 @@
       <updated>1680080798613</updated>
       <workItem from="1680080801857" duration="4951000" />
       <workItem from="1680164037874" duration="30000" />
+      <workItem from="1680763452674" duration="117000" />
+      <workItem from="1680763675664" duration="53000" />
+      <workItem from="1680763753376" duration="149000" />
+      <workItem from="1680763926948" duration="166000" />
+      <workItem from="1680764116934" duration="1457000" />
     </task>
     <servers />
   </component>

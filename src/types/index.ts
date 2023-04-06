@@ -1,8 +1,8 @@
 /* eslint-disable import/first */
 export type Raw = string | number
-import React from 'react'
-import { TableProps } from 'antd/es/table'
 import { Rate, Select } from 'antd'
+import { TableProps } from 'antd/es/table'
+import React from 'react'
 export interface User {
   id: number
   name: string
@@ -49,4 +49,41 @@ export interface IdSelectProps
 export interface PinProps extends React.ComponentProps<typeof Rate> {
   checked: boolean
   onCheckedChange?: (checked: boolean) => void
+}
+
+// 看板
+export interface Kanban {
+  id: number
+  name: string
+  projectId: number
+}
+// 项目
+export interface Task {
+  id: number
+  name: string
+  // 经办人
+  processorId: number
+  projectId: number
+  // 任务组
+  epicId: number
+  kanbanId: number
+  // bug or task
+  typeId: number
+  note: string
+}
+
+//
+export interface Epic {
+  id: number
+  name: string
+  projectId: number
+  // 开始时间
+  start: number
+  // 结束时间
+  end: number
+}
+
+export interface TaskType {
+  id: number
+  name: string
 }
