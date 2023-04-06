@@ -35,7 +35,7 @@ export const useTaskSearchParams = () => {
       typeId: Number(param.typeId) || undefined,
       processorId: Number(param.processorId) || undefined,
       tagId: Number(param.tagId) || undefined,
-      name: debounceName,
+      name: param.name,
     }),
     [projectId, param]
   )
