@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
-import { Card } from 'antd'
+import { Button, Card, Dropdown, MenuProps, Modal, Space } from 'antd'
 import bugIcon from 'assets/bug.svg'
 import taskIcon from 'assets/task.svg'
 import { Mark } from 'components/mark'
 import { Kanban, Task } from 'types'
+import { useDelKanban } from 'utils/kanban'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
 import { CreateTask } from './create-task'
@@ -36,14 +37,49 @@ const TaskCard = ({ task }: { task: Task }) => {
   )
 }
 
+const More = ({ kanban }: { kanban: Kanban }) => {
+  const { mutateAsync } = useDelKanban()
+
+  const startEdit = () => {
+    Modal.confirm({
+      okText: '确定',
+      cancelText: '取消',
+      title: '确定删除看板吗？',
+      onOk() {
+        return mutateAsync({ id: kanban.id })
+      },
+    })
+  }
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Button danger onClick={() => startEdit()}>
+          删除
+        </Button>
+      ),
+    },
+  ]
+
+  return (
+    <Dropdown menu={{ items }}>
+      <Button type="link">...</Button>
+    </Dropdown>
+  )
+}
+
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTaskSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
 
   return (
     <Container>
-      <TasksContainer>
+      <Space>
         {kanban.name}
+        <More kanban={kanban} />
+      </Space>
+      <TasksContainer>
         {tasks?.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

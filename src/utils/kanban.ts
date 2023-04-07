@@ -26,3 +26,18 @@ export const useAddKanban = () => {
     }
   )
 }
+
+export const useDelKanban = () => {
+  const client = useHttp()
+  const queryClient = useQueryClient()
+
+  return useMutation(
+    ({ id }: { id: number }) =>
+      client(`kanbans/${id}`, {
+        method: 'DELETE',
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries('kanbans'),
+    }
+  )
+}
