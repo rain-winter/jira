@@ -3,6 +3,8 @@ import { Divider, List, Popover, Typography } from 'antd'
 import { useProjectModal } from 'screens/project-list/util'
 import { useProjects } from 'utils/project'
 import { ButtonNoPadding } from './lib'
+import React from 'react'
+
 // 把pover抽象成组件，避免直接写在authenticated-app
 export const ProjectPopover = () => {
   const { open } = useProjectModal()

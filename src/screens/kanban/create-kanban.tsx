@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useAddKanban } from 'utils/kanban'
 import { Container } from './kanban-column'
 import { useProjectIdInUrl } from './util'
+import React from 'react'
 
 export const CreateKanban = () => {
   const [name, setName] = useState('')

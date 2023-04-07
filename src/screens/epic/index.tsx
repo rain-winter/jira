@@ -8,6 +8,7 @@ import { Epic } from 'types'
 import { useDeleteEpic, useEpics } from 'utils/epic'
 import { useTasks } from 'utils/task'
 import { CreateEpic } from './create-task'
+import React from 'react'
 
 export const EpicScreen = () => {
   const { data: epics } = useEpics()

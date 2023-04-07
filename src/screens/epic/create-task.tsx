@@ -3,6 +3,8 @@ import { useForm } from 'antd/es/form/Form'
 import { useEffect } from 'react'
 import { useProjectIdInUrl } from 'screens/kanban/util'
 import { useAddEpic } from 'utils/epic'
+import React from 'react'
+
 
 export const CreateEpic = (
   props: Pick<DrawerProps, 'open'> & { onClose: () => void }

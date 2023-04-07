@@ -4,6 +4,7 @@ import { FullPageErrorFallback } from 'components/lib'
 import { useAuth } from 'context/auth-context'
 import { UnauthenticatedApp } from 'unauthenticated-app'
 import './App.css'
+import React from 'react'
 /**
  *
  */

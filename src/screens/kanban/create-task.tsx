@@ -2,6 +2,8 @@ import { Card, Input } from 'antd'
 import { useEffect, useState } from 'react'
 import { useAddTask } from 'utils/task'
 import { useProjectIdInUrl } from './util'
+import React from 'react'
+
 
 export const CreateTask = ({ kanbanId }: { kanbanId: number }) => {
   const [name, setName] = useState('')

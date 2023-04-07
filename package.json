@@ -33,6 +33,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d build -r git@github.com:rain-winter/rain-winter.github.io.git -b main",
     "json-server": "json-server __json_server_mock__/db.json  --middlewares ./__json_server_mock__/middleware.js --watch --port 3001"
   },
   "eslintConfig": {
@@ -43,6 +45,18 @@
     "rules": {
       "react-hooks/exhaustive-deps": "off",
       "react/react-in-jsx-scope": "off"
+    },
+    "parserOptions": {
+      "babelOptions": {
+        "presets": [
+          [
+            "react-app",
+            {
+              "runtime": "automatic"
+            }
+          ]
+        ]
+      }
     }
   },
   "browserslist": {
@@ -59,5 +73,16 @@
   },
   "devDependencies": {
     "@types/qs": "^6.9.7"
+  },
+  "babel": {
+    "presets": [
+      [
+        "react-app",
+        {
+          "runtime": "automatic"
+        }
+      ]
+    ]
   }
+
 }

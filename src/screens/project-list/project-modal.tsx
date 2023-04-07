@@ -4,6 +4,8 @@ import { UserSelect } from 'components/user-select'
 import { useEffect } from 'react'
 import { useAddProject, useEditProject } from 'utils/project'
 import { useProjectModal } from './util'
+import React from 'react'
+
 
 export const ProjectModal = () => {
   const { projectModalOpen, close, editingProject, isLoading } =

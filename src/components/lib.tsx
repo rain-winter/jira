@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Button, Spin, Typography } from 'antd'
 import { DevTools } from 'jira-dev-tool'
+import React from 'react'
 
 export const Row = styled.div<{
   gap?: number | boolean
@@ -57,10 +58,9 @@ export const ButtonNoPadding = styled(Button)`
   padding: 0;
 `
 
-
 export const ScreenContainer = styled.div`
   padding: 3.2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
-`;
+`
